@@ -1,0 +1,50 @@
+name: Build project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.15.2'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        dir: '${{ github.workspace }}/qtroot/'
+        install-deps: 'true'
+        cached: 'false'
+        setup-python: 'true'
+        tools: ''
+        set-env: 'false'
+        tools-only: 'false'
+        aqtversion: '==2.0.0'
+        py7zrversion: '==0.16.1'
+        extra: '--external 7z'
+      
+    
+    - name: build project
+      env:
+        VCVARS_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat
+        QT5_DIR: "${{ github.workspace }}/qtroot/Qt/5.15.2/msvc2019_64"
+      shell: cmd   
+      run: |
+        call "${{ env.VCVARS_PATH }}"
+        Write-Host "QT5_DIR = %QT5_DIR%"
+        mkdir build && cd build
+        cmake -G "Ninja" -DQt5_ROOT=%QT5_DIR% -DCMAKE_INSTALL_PREFIX=release -DCMAKE_BUILD_TYPE=Release ../src
+        ninja all install
+    - uses: actions/upload-artifact@v3
+      with:
+        name: FileCopy
+        path: build/release/*
