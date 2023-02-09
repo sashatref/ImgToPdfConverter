@@ -45,19 +45,11 @@ jobs:
       shell: cmd   
       run: |
         call "${{ env.VCVARS_PATH }}"
-        mkdir build && cd build
-        cmake -G "Ninja" -DQt5_ROOT=%QT5_DIR% -DCMAKE_INSTALL_PREFIX=%cd%/install -DCMAKE_BUILD_TYPE=Release ../src
-        ninja all
-
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
-
-    - name: Project install
-      shell: cmd   
-      run: |
-        call "${{ env.VCVARS_PATH }}"
-        cd build
-        ninja install
+        cd %QT5_DIR%/bin
+        dir
+        rem mkdir build && cd build
+        rem cmake -G "Ninja" -DQt5_ROOT=%QT5_DIR% -DCMAKE_INSTALL_PREFIX=%cd%/install -DCMAKE_BUILD_TYPE=Release ../src
+        rem ninja all install
 
     - uses: actions/upload-artifact@v3
       with:
