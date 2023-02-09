@@ -45,10 +45,17 @@ jobs:
       shell: cmd   
       run: |
         call "${{ env.VCVARS_PATH }}"
-        Write-Host "QT5_DIR = %QT5_DIR%"
         mkdir build && cd build
         cmake -G "Ninja" -DQt5_ROOT=%QT5_DIR% -DCMAKE_INSTALL_PREFIX=%cd%/install -DCMAKE_BUILD_TYPE=Release ../src
-        ninja all install
+        ninja all
+
+    - name: Project install
+      shell: cmd   
+      run: |
+        call "${{ env.VCVARS_PATH }}"
+        cd build
+        ninja install
+
     - uses: actions/upload-artifact@v3
       with:
         name: ImgToPdfConverter
