@@ -16,18 +16,12 @@ jobs:
       with:
         fetch-depth: 0
         submodules: recursive
-    
+  
     - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        aqtversion: '==2.1.*'
-        version: '5.15.2'
-        host: 'windows'
-        target: 'desktop'
-        arch: 'win64_msvc2019_64'
-        modules: 'Desktop MSVC 2019 64-bit debug information files Qt Charts for MSVC 2019 64-bit Qt Data Visualization for MSVC 2019 64-bit Qt Lottie Animation for MSVC 2019 64-bit Qt Network Authentication for MSVC 2019_64-bit Qt Purchasing for MSVC 2019 64-bit Qt Quick 3D for MSVC 2019 64-bit Qt Quick Timeline for MSVC 2019 64-bit Qt Script for MSVC 2019 64-bit Qt Virtual Keyboard for MSVC 2019 64-bit Qt WebEngine for MSVC 2019 64-bit Qt WebGL Streaming Plugin for msvc2019_64-bit'
-        tools: 'tools_cmake tools_generic tools_maintenance tools_qtcreator'
-      
+      run: |
+        curl -vLo qt-installer.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
+        qt-installer.exe --accept-licenses --default-answer --confirm-command install qt.qt5.5152.win64_msvc2019_64 --root "${{ github.workspace }}/Qt"
+
     - name: Configure build for x86
       uses: ilammy/msvc-dev-cmd@v1
       with:
@@ -37,7 +31,9 @@ jobs:
       env:
         QT5_DIR: "${{ github.workspace }}/qtroot/Qt/5.15.2/msvc2019_64"
       run: |
-        cd "${{ env.QT5_DIR }}/bin"
+        tree "${{ github.workspace }}/Qt"
+
+        cd "${{ github.workspace }}/Qt"
         dir
         # mkdir build && cd build
         # rem cmake -G "Ninja" -DQt5_ROOT="${{ env.QT5_DIR }}" -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release ../src
