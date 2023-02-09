@@ -1,0 +1,12 @@
+/Builds_*
+/Build-*
+/include
+/bin
+*.user
+/translations
+/AviaStudents*
+/BUILD_QT_5_9_2_VC_14
+/TSStudents_QT_5_9_2_VC_14
+/TSStudents_QT_5_9_9_VC_14
+/.qmake.stash
+/src/CMakeLists.txt.user
