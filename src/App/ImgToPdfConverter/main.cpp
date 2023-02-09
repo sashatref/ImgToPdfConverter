@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     ExtendApp a(argc, argv);
     a.setApplicationVersion(FULL_VER);
 
-    a.setStyle(QStyleFactory::create("Avia1Style"));
+    a.setStyle(QStyleFactory::create("customStyle"));
 
     a.getCmdParser()->addPositionalArgument("files", "files");
 
