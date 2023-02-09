@@ -49,6 +49,9 @@ jobs:
         cmake -G "Ninja" -DQt5_ROOT=%QT5_DIR% -DCMAKE_INSTALL_PREFIX=%cd%/install -DCMAKE_BUILD_TYPE=Release ../src
         ninja all
 
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+
     - name: Project install
       shell: cmd   
       run: |
