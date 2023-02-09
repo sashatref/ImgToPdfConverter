@@ -9,10 +9,13 @@ on:
       - main
 
 jobs:
-  build:
+  windows:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: recursive
     
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
@@ -23,13 +26,15 @@ jobs:
         arch: 'win64_msvc2019_64'
         dir: '${{ github.workspace }}/qtroot/'
         install-deps: 'true'
-        cached: 'false'
+        archives: 'qtbase'
+        cache: 'false'
+        cache-key-prefix: 'install-qt-action'
         setup-python: 'true'
-        tools: ''
-        set-env: 'false'
+        tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+        set-env: 'true'
         tools-only: 'false'
-        aqtversion: '==2.0.0'
-        py7zrversion: '==0.16.1'
+        aqtversion: '==2.1.*'
+        py7zrversion: '==0.19.*'
         extra: '--external 7z'
       
     
