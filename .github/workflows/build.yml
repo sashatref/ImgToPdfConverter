@@ -22,7 +22,6 @@ jobs:
         submodules: recursive
   
     - name: Install Qt
-      if: false
       run: |
         curl -vLo qt-installer.exe https://download.qt.io/official_releases/online_installers/qt-unified-windows-x64-online.exe
         .\qt-installer.exe --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount `
@@ -41,7 +40,6 @@ jobs:
       env:
         QT5_DIR: "${{ env.QT_PATH }}/5.15.2/msvc2019_64"
       run: |
-        tree
         cmake -G "Ninja" -B build -S source-code/src -DQt5_ROOT="${{ env.QT5_DIR }}" -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release
         cd build
         ninja all install
