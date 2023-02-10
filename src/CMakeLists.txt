@@ -19,11 +19,15 @@ include(3rdparty/cmake_modules/appFlags.cmake)
 add_subdirectory(3rdparty)
 add_subdirectory(App)
 
+set(LINUX_DEPLOY_TOOL ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/deploy_tools/ubuntu/linuxdeployqt-continuous-x86_64.AppImage)
 
 if(NOT BUILD_STATIC)
-    deployTargets(TARGETS
+    deployTargets(
+        TARGETS
         HelperLibrary
         PropertyBrowser3
         CustomWidgets
+        MAINTARGET
+        ImgToPdfConverter
     )
 endif()
