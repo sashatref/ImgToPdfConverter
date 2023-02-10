@@ -11,6 +11,9 @@ on:
 jobs:
   windows:
     runs-on: windows-2019
+    env:
+      QT_PATH: ${{ github.workspace }}/Qt
+
     steps:
     - uses: actions/checkout@v3
       if: false
@@ -18,13 +21,11 @@ jobs:
         fetch-depth: 0
         submodules: recursive
   
-    env:
-      QT_PATH: ${{ github.workspace }}/Qt
-
     - name: Install Qt
       run: |
         curl -vLo qt-installer.exe https://download.qt.io/official_releases/online_installers/qt-unified-windows-x64-online.exe
-        .\qt-installer.exe --accept-licenses --accept-messages --accept-obligations --confirm-command `
+        .\qt-installer.exe --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount `
+                            --no-default-installations `
                             install qt.qt5.5152.win64_msvc2019_64 `
                             --root "${{ env.QT_PATH }}" `
                             --email "${{ secrets.QT_INSTALLER_EMAIL }}" `
