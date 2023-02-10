@@ -47,4 +47,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: ImgToPdfConverter
-        path: source-code/build/install/*
+        path: install/*
