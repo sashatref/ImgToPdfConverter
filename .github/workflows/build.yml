@@ -61,6 +61,11 @@ jobs:
         path: "source-code"
         submodules: recursive
   
+    - name: Install Dependencies
+      run: |
+        sudo apt install -y libglu1-mesa-dev libssl-dev liblz4-dev liblzo2-dev libjsoncpp-dev pkg-config ninja-build
+        sudo apt install -y libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libxcb-randr0 libxcb-shape0
+
     - name: Install Qt
       run: |
         curl -vLo qt-installer.run https://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
