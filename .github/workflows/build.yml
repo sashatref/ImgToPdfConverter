@@ -16,7 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      if: false
       with:
         fetch-depth: 0
         path: "source-code"
@@ -41,7 +40,7 @@ jobs:
       env:
         QT5_DIR: "${{ env.QT_PATH }}/5.15.2/msvc2019_64"
       run: |
-        cmake -G "Ninja" -B build -S source-code -DQt5_ROOT="${{ env.QT5_DIR }}" -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release ../src
+        cmake -G "Ninja" -B build -S source-code -DQt5_ROOT="${{ env.QT5_DIR }}" -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release
         cd build
         ninja all install
 
