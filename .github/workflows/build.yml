@@ -68,6 +68,9 @@ jobs:
         sudo apt install -y libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libxcb-randr0 libxcb-shape0
         sudo apt install -y libx11-xcb1 libxcb-randr0 libxcb-shape0 libxcb-xfixes0
 
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+
     - name: Install Qt
       run: |
         curl -vLo qt-installer.run https://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
@@ -76,7 +79,9 @@ jobs:
         export DISPLAY=:99
         sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
         sleep 2
-        
+
+
+
         ./qt-installer.run --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount `
                             --no-default-installations `
                             install qt.qt5.5152.gcc_64 `
