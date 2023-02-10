@@ -22,7 +22,7 @@ jobs:
       run: |
         curl -vLo qt-installer.exe https://download.qt.io/official_releases/online_installers/qt-unified-windows-x64-online.exe
         dir
-        ./qt-installer.exe --accept-licenses --default-answer --confirm-command install qt.qt5.5152.win64_msvc2019_64 --root "${{ github.workspace }}/Qt" --email ${{ secrets.QT_INSTALLER_EMAIL }} --pw ${{ secrets.QT_INSTALLER_PASSWORD }}
+        ./qt-installer.exe --accept-licenses --accept-messages --confirm-command install qt.qt5.5152.win64_msvc2019_64 --root "${{ github.workspace }}/Qt" --email "${{ secrets.QT_INSTALLER_EMAIL }}" --pw "${{ secrets.QT_INSTALLER_PASSWORD }}"
 
     - name: Configure build for x86
       uses: ilammy/msvc-dev-cmd@v1
