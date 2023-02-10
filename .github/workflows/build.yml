@@ -1,0 +1,50 @@
+name: Build project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  windows:
+    runs-on: windows-2019
+    env:
+      QT_PATH: ${{ github.workspace }}/Qt
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        path: "source-code"
+        submodules: recursive
+  
+    - name: Install Qt
+      run: |
+        curl -vLo qt-installer.exe https://download.qt.io/official_releases/online_installers/qt-unified-windows-x64-online.exe
+        .\qt-installer.exe --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount `
+                            --no-default-installations `
+                            install qt.qt5.5152.win64_msvc2019_64 `
+                            --root "${{ env.QT_PATH }}" `
+                            --email "${{ secrets.QT_INSTALLER_EMAIL }}" `
+                            --pw "${{ secrets.QT_INSTALLER_PASSWORD }}"
+
+    - name: Configure build for x64
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+    
+    - name: Build project
+      env:
+        QT5_DIR: "${{ env.QT_PATH }}/5.15.2/msvc2019_64"
+      run: |
+        cmake -G "Ninja" -B build -S source-code/src -DQt5_ROOT="${{ env.QT5_DIR }}" -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release
+        cd build
+        ninja all install
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ImgToPdfConverter
+        path: install/*
