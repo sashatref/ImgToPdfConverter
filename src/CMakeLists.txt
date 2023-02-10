@@ -21,9 +21,12 @@ add_subdirectory(App)
 
 
 if(NOT BUILD_STATIC)
-    deployTargets(TARGETS
+    deployTargets(
+        TARGETS
         HelperLibrary
         PropertyBrowser3
         CustomWidgets
+        MAINTARGET
+        ImgToPdfConverter
     )
 endif()
