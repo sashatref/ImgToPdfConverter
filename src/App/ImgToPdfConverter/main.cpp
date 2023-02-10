@@ -3,7 +3,6 @@
 #include "mainwindow.h"
 #include "buildNumber.h"
 #include "Models/settingsinfo.h"
-#include "Windows.h"
 
 using SerializerQt::Serializer;
 
