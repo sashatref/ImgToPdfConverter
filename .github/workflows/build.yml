@@ -18,12 +18,15 @@ jobs:
         fetch-depth: 0
         submodules: recursive
   
+    env:
+      QT_PATH: ${{ github.workspace }}/Qt
+
     - name: Install Qt
       run: |
         curl -vLo qt-installer.exe https://download.qt.io/official_releases/online_installers/qt-unified-windows-x64-online.exe
         .\qt-installer.exe --accept-licenses --accept-messages --accept-obligations --confirm-command `
                             install qt.qt5.5152.win64_msvc2019_64 `
-                            --root "${{ github.workspace }}/Qt" `
+                            --root "${{ env.QT_PATH }}" `
                             --email "${{ secrets.QT_INSTALLER_EMAIL }}" `
                             --pw "${{ secrets.QT_INSTALLER_PASSWORD }}"
 
