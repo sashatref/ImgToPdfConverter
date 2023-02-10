@@ -19,6 +19,7 @@ jobs:
       if: false
       with:
         fetch-depth: 0
+        path: "source-code"
         submodules: recursive
   
     - name: Install Qt
@@ -37,6 +38,7 @@ jobs:
         arch: x64
     
     - name: Build project
+      working-directory: source-code
       env:
         QT5_DIR: "${{ env.QT_PATH }}/5.15.2/msvc2019_64"
       run: |
@@ -47,4 +49,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: ImgToPdfConverter
-        path: build/install/*
+        path: source-code/build/install/*
