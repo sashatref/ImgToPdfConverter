@@ -10,7 +10,6 @@ on:
 
 jobs:
   windows:
-    if: false
     runs-on: windows-2019
     env:
       QT_PATH: ${{ github.workspace }}/Qt
@@ -83,11 +82,6 @@ jobs:
                             --root "${{ env.QT_PATH }}" \
                             --email "${{ secrets.QT_INSTALLER_EMAIL }}" \
                             --pw "${{ secrets.QT_INSTALLER_PASSWORD }}"
-
-    - name: Configure build for x64
-      uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: x64
     
     - name: Build project
       env:
