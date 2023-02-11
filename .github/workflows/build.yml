@@ -98,7 +98,7 @@ jobs:
         name: ImgToPdfConverter-ubuntu20
         path: install/*
 
-  ubuntu:
+  macos:
     if: false
     runs-on: macos-12
     env:
