@@ -16,7 +16,14 @@ set(SOURCES
     project_pch.h
 )
 
-add_executable(${PROJECT_NAME} WIN32 ${SOURCES})
+if(WIN32)
+    add_executable(${PROJECT_NAME} WIN32 ${SOURCES})
+elseif(LINUX)
+    add_executable(${PROJECT_NAME} ${SOURCES})
+elseif(APPLE)
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES})
+endif()
+
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
