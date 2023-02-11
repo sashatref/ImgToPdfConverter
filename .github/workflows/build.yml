@@ -10,6 +10,7 @@ on:
 
 jobs:
   windows:
+    if: false
     runs-on: windows-2019
     env:
       QT_PATH: ${{ github.workspace }}/Qt
@@ -50,6 +51,7 @@ jobs:
         path: install/*
 
   ubuntu:
+    if: false
     runs-on: ubuntu-20.04
     env:
       QT_PATH: ${{ github.workspace }}/Qt
@@ -94,4 +96,46 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: ImgToPdfConverter-ubuntu20
+        path: install/*
+
+  ubuntu:
+    if: false
+    runs-on: macos-12
+    env:
+      QT_PATH: ${{ github.workspace }}/Qt
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        path: "source-code"
+        submodules: recursive
+  
+    - name: Install Dependencies
+      run: |
+        brew install ninja jq
+
+    - name: Install Qt
+      run: |
+        curl -vLo qt-installer.dmg https://download.qt.io/official_releases/online_installers/qt-unified-mac-x64-online.dmg
+        sudo chmod +x ./qt-installer.dmg
+
+        ./qt-installer.dmg --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount \
+                            --no-default-installations \
+                            install qt.qt5.5152.clang_64 \
+                            --root "${{ env.QT_PATH }}" \
+                            --email "${{ secrets.QT_INSTALLER_EMAIL }}" \
+                            --pw "${{ secrets.QT_INSTALLER_PASSWORD }}"
+    
+    - name: Build project
+      env:
+        QT5_DIR: "${{ env.QT_PATH }}/5.15.2/clang_64"
+      run: |
+        cmake -G "Ninja" -B build -S source-code/src -DQt5_ROOT="${{ env.QT5_DIR }}" -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release
+        cd build
+        ninja all install
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ImgToPdfConverter-macos
         path: install/*
