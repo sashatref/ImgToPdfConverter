@@ -30,4 +30,11 @@ if(NOT BUILD_STATIC)
         MAINTARGET
         ImgToPdfConverter
     )
+else()
+    deployTargets(
+        TARGETS
+        ImgToPdfConverter
+        MAINTARGET
+        ImgToPdfConverter
+    )
 endif()
