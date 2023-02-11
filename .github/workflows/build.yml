@@ -99,7 +99,6 @@ jobs:
         path: install/*
 
   macos:
-    if: false
     runs-on: macos-12
     env:
       QT_PATH: ${{ github.workspace }}/Qt
