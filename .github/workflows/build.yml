@@ -117,9 +117,9 @@ jobs:
     - name: Install Qt
       run: |
         curl -vLo qt-installer.dmg https://download.qt.io/official_releases/online_installers/qt-unified-mac-x64-online.dmg
-        sudo chmod +x ./qt-installer.dmg
-
-        ./qt-installer.dmg --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount \
+        hdiutil attach ./qt-installer.dmg
+        /Volumes/qt-unified-macOS-x64-4.5.1-online/qt-unified-macOS-x64-4.5.1-online.app/Contents/MacOS/qt-unified-macOS-x64-4.5.1-online \
+                            --accept-licenses --accept-messages --accept-obligations --confirm-command --reset-qtaccount \
                             --no-default-installations \
                             install qt.qt5.5152.clang_64 \
                             --root "${{ env.QT_PATH }}" \
