@@ -171,7 +171,8 @@ void MainWindow::saveState(LayoutSaver &_saver) const
 
 void MainWindow::initUiComponets()
 {
-
+    //добавляет меню для переключения локализации программы
+    qApp->langugeHelper()->createActions(ui->menuLanguage, sgSettings::ins().m_lang);
 }
 
 
@@ -200,4 +201,13 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionAddToSendDialog_triggered()
 {
 
+}
+
+
+void MainWindow::updateLanguage()
+{
+    ui->retranslateUi(this);
+    s->m_lang = qApp->langugeHelper()->getCurrentShortLanguageName();
+    logMessage(QString(tr("Локализация <%1> загружена"))
+               .arg(qApp->langugeHelper()->getCurrentFullLanguageName()), QtInfoMsg);
 }
