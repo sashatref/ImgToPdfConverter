@@ -32,6 +32,7 @@
 #include <HelperLibrary/Styles/iconsenum.h>
 #include <HelperLibrary/singleton.hpp>
 #include <HelperLibrary/pdf/PdfExporter.h>
+#include <HelperLibrary/LanguageHelper/languagehelper.h>
 
 #include <PropertyBrowser3/propertybrowser3.h>
 #include <PropertyBrowser3/ipropertyinfomap.h>

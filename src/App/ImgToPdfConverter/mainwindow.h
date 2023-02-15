@@ -38,6 +38,7 @@ protected:
     virtual void initUiComponets() override;
     virtual void initConnections() override;
     virtual void settingsChanged() override;
+    virtual void updateLanguage() override;
 
 private slots:
     void on_actionSaveToPdf_triggered();
