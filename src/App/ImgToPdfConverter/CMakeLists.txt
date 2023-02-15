@@ -28,7 +28,7 @@ elseif(APPLE)
         set_property(SOURCE ${FILE} PROPERTY MACOSX_PACKAGE_LOCATION "Resources/translations")
     endforeach ()
 
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${TR_RESOURCES})
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES} ${TR_RESOURCES})
 endif()
 
 
