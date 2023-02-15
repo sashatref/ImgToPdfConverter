@@ -208,6 +208,4 @@ void MainWindow::updateLanguage()
 {
     ui->retranslateUi(this);
     s->m_lang = qApp->langugeHelper()->getCurrentShortLanguageName();
-    logMessage(QString(tr("Локализация <%1> загружена"))
-               .arg(qApp->langugeHelper()->getCurrentFullLanguageName()), QtInfoMsg);
 }
