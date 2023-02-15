@@ -29,6 +29,15 @@ elseif(APPLE)
     endforeach ()
 
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES} ${TR_RESOURCES})
+
+    configure_file("mac/Info.plist.in" "${CMAKE_CURRENT_BINARY_DIR}/Info.plist" @ONLY)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        OUTPUT_NAME ${PROJECT_NAME}
+        MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}"
+        #MACOSX_BUNDLE_GUI_IDENTIFIER "${ALKIRA_GUI_CLIENT_ID}"
+        #MACOSX_BUNDLE_ICON_FILE "${MACOSX_BUNDLE_ICON_FILE}"
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_BINARY_DIR}/Info.plist"
+    )
 endif()
 
 
