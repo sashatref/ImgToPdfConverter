@@ -47,7 +47,7 @@ jobs:
         cd build
         ninja all install
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ImgToPdfConverter-win64
         path: install/*
@@ -97,7 +97,7 @@ jobs:
         cd build
         ninja all install
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ImgToPdfConverter-ubuntu20
         path: install/*
@@ -141,7 +141,7 @@ jobs:
         cd build
         ninja all install
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ImgToPdfConverter-macos
         path: install/*
