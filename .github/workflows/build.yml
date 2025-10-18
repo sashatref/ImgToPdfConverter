@@ -10,7 +10,7 @@ on:
 
 jobs:
   windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
     env:
       QT_PATH: ${{ github.workspace }}/Qt
 
@@ -53,7 +53,7 @@ jobs:
         path: install/*
 
   ubuntu:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       QT_PATH: ${{ github.workspace }}/Qt
 
